@@ -92,6 +92,24 @@ app.patch('/todos/:id', (req, res) => {
       return res.status(400).send();
     })
 })
+
+
+
+app.post('/users', async (req, res) => {
+  const body = _.pick(req.body, ['email', 'password']);
+  const user = new User(body);
+  try {
+    let resUser = await user.save();
+    let token = await user.generateAuthToken();
+    res.header('x-auth', token).send(user);
+  } catch (error) {
+    console.log(error)
+    res.status(400).send(error);
+  }
+})
+
+
+
 app.listen(post, () => {
   console.log(`Started on port ${post}`);
 });
