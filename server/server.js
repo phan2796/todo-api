@@ -23,7 +23,7 @@ app.post('/todos', (req, res) => {
   });
 });
 app.get('/', (req, res) => {
-  res.send('hello world!');
+  res.send('hello world! My name is Phan');
 });
 app.get('/todos', (req, res) => {
   Todo.find().then((todos) => {
